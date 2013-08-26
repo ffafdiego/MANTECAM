@@ -71,7 +71,7 @@ public class ManagedBeanItem {
     
     public void nuevoItem(Vehiculo idCamion){
         Item item;
-        item = new Item(descripcionItem, fecha, kilometrajeLimite);
+   
         
           
     }

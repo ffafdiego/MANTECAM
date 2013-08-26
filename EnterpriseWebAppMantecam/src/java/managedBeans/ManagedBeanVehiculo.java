@@ -33,26 +33,33 @@ public class ManagedBeanVehiculo {
     private VehiculoFacadeLocal vehiculoFacade;
     private Usuario idUsario;
     private Integer idVehiculo;
-    private String patente;
-    private String marca;
-    private String modelo;
-    private Integer ano;
-    private Integer kilometraje_vehiculo;
-    private String chofer;
-    private String estado_vehiculo;
+    private Integer kilometraje_vehiculo, ano, hola;
+    private String chofer, estado_vehiculo, modelo, marca, patente;
+    private final static String[] estado_vehiculos;
     private Item item,aceite,afinamiento,freno,neumatico,amortiguacion,circuito;
     private List<Vehiculo> vehiculos;
     private Vehiculo auxiliar;
-    private Integer hola;
-    private Tipoitem tipoItem;
+    private Tipoitem tipoItem;   
+    static{
+        estado_vehiculos = new String[3];
+        estado_vehiculos[0] = "No Disponible";
+        estado_vehiculos[1] = "Disponible";
+        estado_vehiculos[2] = "De Baja";   
+    }
+    
         public ManagedBeanVehiculo() {
     }
+            
     
     @PostConstruct
     public void init(){
         vehiculos = vehiculoFacade.findAll();
     }
-
+    
+    public String[] getEstado_vehiculos(){
+        return estado_vehiculos;    
+    }
+    
     public Integer getHola() {
         return hola;
     }
@@ -169,9 +176,10 @@ public class ManagedBeanVehiculo {
       }
       public void nuevoItem(Vehiculo idV,Integer km,Tipoitem tipo){
       
-      item = new Item("Primer Uso", null, km);
+      item = new Item("Nuevo", 0 , "Nuevito", null , km);
+    
       java.util.Date fecha = new Date();
-      item.setFecha(fecha);
+      item.setFecha(fecha);     
       item.setIdVehiculo(idV);
       item.setIdTipoitem(tipo);
       itemFacade.create(item);

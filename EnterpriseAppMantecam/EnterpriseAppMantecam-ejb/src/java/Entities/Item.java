@@ -36,6 +36,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Item.findByFecha", query = "SELECT i FROM Item i WHERE i.fecha = :fecha"),
     @NamedQuery(name = "Item.findByKilometrajeLimite", query = "SELECT i FROM Item i WHERE i.kilometrajeLimite = :kilometrajeLimite")})
 public class Item implements Serializable {
+    @Size(max = 1024)
+    @Column(name = "ESTADO_ITEM")
+    private String estadoItem;
+    @Column(name = "CANTIDAD_REVISIONES")
+    private Integer cantidadRevisiones;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,11 +62,15 @@ public class Item implements Serializable {
     @ManyToOne
     private Tipoitem idTipoitem;
 
-    public Item(String descripcionItem, Date fecha, Integer kilometrajeLimite) {
+    public Item(String estadoItem, Integer cantidadRevisiones, String descripcionItem, Date fecha, Integer kilometrajeLimite) {
+        this.estadoItem = estadoItem;
+        this.cantidadRevisiones = cantidadRevisiones;
         this.descripcionItem = descripcionItem;
         this.fecha = fecha;
         this.kilometrajeLimite = kilometrajeLimite;
     }
+
+  
     public Item() {
     }
 
@@ -116,6 +125,21 @@ public class Item implements Serializable {
     public void setIdTipoitem(Tipoitem idTipoitem) {
         this.idTipoitem = idTipoitem;
     }
+     public String getEstadoItem() {
+        return estadoItem;
+    }
+
+    public void setEstadoItem(String estadoItem) {
+        this.estadoItem = estadoItem;
+    }
+
+    public Integer getCantidadRevisiones() {
+        return cantidadRevisiones;
+    }
+
+    public void setCantidadRevisiones(Integer cantidadRevisiones) {
+        this.cantidadRevisiones = cantidadRevisiones;
+    }
 
     @Override
     public int hashCode() {
@@ -141,5 +165,7 @@ public class Item implements Serializable {
     public String toString() {
         return "Entities.Item[ idItem=" + idItem + " ]";
     }
+
+   
     
 }

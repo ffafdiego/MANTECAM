@@ -22,14 +22,7 @@
                 <p:ajax event="rowEditCancel" listener="#{managedBeanVehiculo.onCancel}" update=":form:messages" />  
 
                 <p:column headerText="Patente" style="width:30%">  
-                    <p:cellEditor>  
-                        <f:facet name="output">  
-                            <h:outputText value="#{vehiculo.patente}" />  
-                        </f:facet>  
-                        <f:facet name="input">  
-                            <p:inputText value="#{vehiculo.patente}" style="width:100%"/>  
-                        </f:facet>  
-                    </p:cellEditor>  
+                    <h:outputText value="#{vehiculo.patente}" />  
                 </p:column>  
 
                 <p:column headerText="Modelo" style="width:20%">  
@@ -43,18 +36,18 @@
                     </p:cellEditor>  
                 </p:column>  
 
-                <p:column headerText="Estado del Vehículo" style="width:24%">  
-                    <p:cellEditor>  
-                        <f:facet name="output">  
-                            <h:outputText value="#{vehiculo.estadoVehiculo}" />  
-                        </f:facet>  
-                        <f:facet name="input">  
-                            <p:inputText value="#{vehiculo.estadoVehiculo}" style="width:100%" label="Year"/>  
-                        </f:facet> 
-                    </p:cellEditor>  
-                </p:column>  
+                 <p:column headerText="Estado del Vehículo" style="width:25%">  
+            <p:cellEditor>  
+                <f:facet name="output"><h:outputText value="#{vehiculo.estadoVehiculo}" /></f:facet>  
+                <f:facet name="input">  
+                    <h:selectOneMenu value="#{vehiculo.estadoVehiculo}" style="width:100%">  
+                        <f:selectItems  value="#{managedBeanVehiculo.estado_vehiculos}" var="estado" itemLabel="#{estado}" itemValue="#{estado}" />  
+                    </h:selectOneMenu>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>  
 
-                 <p:column headerText="Kilometraje" style="width:24%">  
+                 <p:column headerText="Kilometraje" style="width:5%">  
                     <p:cellEditor>  
                         <f:facet name="output">  
                             <h:outputText value="#{vehiculo.kilometrajeVehiculo}" />  
@@ -72,17 +65,23 @@
                         <f:facet name="input">  
                             <p:inputText value="#{vehiculo.ano}" style="width:100%" label="Year"/>  
                         </f:facet> 
-                    </p:cellEditor>  
+                    </p:cellEditor>                      
                 </p:column>  
-
+                <p:column headerText="Chofer de Vehículo" style="width:24%">  
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{vehiculo.chofer}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{vehiculo.chofer}" style="width:100%" label="Year"/>  
+                        </f:facet> 
+                    </p:cellEditor>  
+                </p:column>
                 <p:column style="width:6%">  
                     <p:rowEditor />  
-                </p:column>  
-
+                </p:column> 
             </p:dataTable>  
-
-        </h:form>  
-                  
+        </h:form>                    
     </h:body>
 </html>
 
