@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditJefeDePlantaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditJefeDePlantaLabel_idUsario}" for="idUsario" />
+                    <h:inputText id="idUsario" value="#{jefeDePlantaController.selected.idUsario}" title="#{bundle.EditJefeDePlantaTitle_idUsario}" required="true" requiredMessage="#{bundle.EditJefeDePlantaRequiredMessage_idUsario}"/>
+                    <h:outputLabel value="#{bundle.EditJefeDePlantaLabel_username}" for="username" />
+                    <h:inputText id="username" value="#{jefeDePlantaController.selected.username}" title="#{bundle.EditJefeDePlantaTitle_username}" />
+                    <h:outputLabel value="#{bundle.EditJefeDePlantaLabel_pass}" for="pass" />
+                    <h:inputText id="pass" value="#{jefeDePlantaController.selected.pass}" title="#{bundle.EditJefeDePlantaTitle_pass}" />
+                    <h:outputLabel value="#{bundle.EditJefeDePlantaLabel_nombreJplanta}" for="nombreJplanta" />
+                    <h:inputText id="nombreJplanta" value="#{jefeDePlantaController.selected.nombreJplanta}" title="#{bundle.EditJefeDePlantaTitle_nombreJplanta}" />
+                    <h:outputLabel value="#{bundle.EditJefeDePlantaLabel_apellidoJplanta}" for="apellidoJplanta" />
+                    <h:inputText id="apellidoJplanta" value="#{jefeDePlantaController.selected.apellidoJplanta}" title="#{bundle.EditJefeDePlantaTitle_apellidoJplanta}" />
+                    <h:outputLabel value="#{bundle.EditJefeDePlantaLabel_telefonoJplanta}" for="telefonoJplanta" />
+                    <h:inputText id="telefonoJplanta" value="#{jefeDePlantaController.selected.telefonoJplanta}" title="#{bundle.EditJefeDePlantaTitle_telefonoJplanta}" />
+                    <h:outputLabel value="#{bundle.EditJefeDePlantaLabel_usuario}" for="usuario" />
+                    <h:selectOneMenu id="usuario" value="#{jefeDePlantaController.selected.usuario}" title="#{bundle.EditJefeDePlantaTitle_usuario}" required="true" requiredMessage="#{bundle.EditJefeDePlantaRequiredMessage_usuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{jefeDePlantaController.update}" value="#{bundle.EditJefeDePlantaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditJefeDePlantaViewLink}"/>
+                <br />
+                <h:commandLink action="#{jefeDePlantaController.prepareList}" value="#{bundle.EditJefeDePlantaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditJefeDePlantaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

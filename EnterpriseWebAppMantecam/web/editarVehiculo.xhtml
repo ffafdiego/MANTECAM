@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">  
+
+            <p:growl id="messages" showDetail="true"/>  
+
+            <p:dataTable var="vehiculo" value="#{managedBeanVehiculo.vehiculos}" id="carList" editable="true">  
+
+                <f:facet name="header">  
+                    In-Cell Editing  
+                </f:facet>  
+
+                <p:ajax event="rowEdit" listener="#{managedBeanVehiculo.editarCamion}" update=":form:messages" />  
+                <p:ajax event="rowEditCancel" listener="#{managedBeanVehiculo.onCancel}" update=":form:messages" />  
+
+                <p:column headerText="Patente" style="width:30%">  
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{vehiculo.patente}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{vehiculo.patente}" style="width:100%"/>  
+                        </f:facet>  
+                    </p:cellEditor>  
+                </p:column>  
+
+                <p:column headerText="Modelo" style="width:20%">  
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{vehiculo.modelo}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{vehiculo.modelo}" style="width:100%" label="Year"/>  
+                        </f:facet>  
+                    </p:cellEditor>  
+                </p:column>  
+
+                <p:column headerText="Estado del Vehículo" style="width:24%">  
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{vehiculo.estadoVehiculo}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{vehiculo.estadoVehiculo}" style="width:100%" label="Year"/>  
+                        </f:facet> 
+                    </p:cellEditor>  
+                </p:column>  
+
+                 <p:column headerText="Kilometraje" style="width:24%">  
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{vehiculo.kilometrajeVehiculo}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{vehiculo.kilometrajeVehiculo}" style="width:100%" label="Year"/>  
+                        </f:facet> 
+                    </p:cellEditor>  
+                </p:column>  
+                <p:column headerText="Año del Vehículo" style="width:24%">  
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{vehiculo.ano}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{vehiculo.ano}" style="width:100%" label="Year"/>  
+                        </f:facet> 
+                    </p:cellEditor>  
+                </p:column>  
+
+                <p:column style="width:6%">  
+                    <p:rowEditor />  
+                </p:column>  
+
+            </p:dataTable>  
+
+        </h:form>  
+                  
+    </h:body>
+</html>
+

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <a href="http://localhost:8080/EnterpriseWebAppMantecam/"><img src="resources/mantecam.jpg" width="1350" height="82" alt="mantecam"/>
+                    </a>  
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="250" header="Menú" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Mantecam">
+                            <p:menuitem value="Ingresar Vehiculo" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/nuevoVehiculo.xhtml" />
+                            <p:menuitem value="Ver Listado de Vehículos" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/listarVehiculos.xhtml" />
+                            <p:menuitem value="Agregar Trabajo" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/nuevoTrabajo.xhtml" />
+                            <p:menuitem value="Ver Listado de Trabajos" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/listarTareas.xhtml" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                     <h:form>
+    <h:panelGrid columns="2">
+         
+      
+            
+        <h:outputText value="Seleccione vehículo:" />  
+        
+        <h:selectOneMenu value="#{managedBeanTrabajo.auxiliar}"  >
+        <f:selectItems value="#{managedBeanTrabajo.vehiculos}" var="user" itemValue="#{user.idVehiculo}" itemLabel="Patente: #{user.patente} Modelo: #{user.modelo} "/>
+        </h:selectOneMenu>
+        <h:outputLabel value="Lugar"/> 
+        <p:inputText value="#{managedBeanTrabajo.lugar}"/>
+        <h:outputLabel value="Descripcion del Trabajo"/> 
+        <p:inputText value="#{managedBeanTrabajo.descripcion}"/>             
+        <h:outputLabel value="Fecha"/> 
+        <p:calendar value="#{managedBeanTrabajo.fechaTrabajo}" pattern="dd/MM/yyyy" id="popupCal"/>
+        <h:outputLabel value="Hora de Ingreso"/> 
+        <p:calendar value="#{managedBeanTrabajo.horaIngreso}" pattern="HH:mm a" timeOnly="true"/>
+        <h:outputLabel value="Hora de Salida"/> 
+        <p:calendar value="#{managedBeanTrabajo.horaSalida}" pattern="HH:mm a" timeOnly="true"/>
+        <h:outputLabel value="Estado de Trabajo"/> 
+        <p:selectOneMenu value="#{managedBeanTrabajo.estadoTrabajo}">  
+            <f:selectItem itemLabel="Selecciona Estado de Trabajo" itemValue="" />  
+            <f:selectItem itemLabel="Vigente" itemValue="Vigente" />  
+            <f:selectItem itemLabel="Pendiente" itemValue="2" />  
+            <f:selectItem itemLabel="Finalizado" itemValue="3" />  
+        </p:selectOneMenu>  
+        
+        <p></p>
+        <p:commandButton value="Agregar" action="#{managedBeanTrabajo.crearTrabajo()}"/> 
+        </h:panelGrid>
+
+
+            
+        </h:form>
+                    
+                </p:layoutUnit>
+                
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+

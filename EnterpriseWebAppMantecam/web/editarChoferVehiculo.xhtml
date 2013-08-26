@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">  
+
+            <p:growl id="messages" showDetail="true"/>  
+
+            <p:dataTable var="vehiculo" value="#{managedBeanVehiculo.vehiculos}" id="carList" editable="true">  
+
+                <f:facet name="header">  
+                    In-Cell Editing  
+                </f:facet>  
+
+                <p:ajax event="rowEdit" listener="#{managedBeanVehiculo.editarChofer}" update=":form:messages" />  
+                <p:ajax event="rowEditCancel" listener="#{managedBeanVehiculo.onCancel}" update=":form:messages" />  
+
+                <p:column headerText="Chofer" style="width:30%">  
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{vehiculo.chofer}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{vehiculo.chofer}" style="width:100%"/>  
+                        </f:facet>  
+                    </p:cellEditor>  
+                </p:column>  
+
+               <p:column style="width:6%">  
+                    <p:rowEditor />  
+                </p:column>  
+
+            </p:dataTable>  
+
+        </h:form>  
+                  
+    </h:body>
+</html>
+

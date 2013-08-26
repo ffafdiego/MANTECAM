@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+   <h:form>  
+       <p:dataTable var="vehiculos" value="#{managedBeanVehiculo.vehiculos}">  
+        <p:column headerText="Patente">  
+            <h:outputText value="#{vehiculos.patente}" />  
+        </p:column>  
+  
+        <p:column headerText="Marca">  
+            <h:outputText value="#{vehiculos.marca}" />  
+        </p:column>  
+  
+        <p:column headerText="Modelo">  
+            <h:outputText value="#{vehiculos.modelo}" />  
+        </p:column>  
+  
+        <p:column headerText="Año">  
+            <h:outputText value="#{vehiculos.ano}" />  
+        </p:column> 
+           
+        <p:column headerText="kilometraje">  
+            <h:outputText value="#{vehiculos.kilometrajeVehiculo}" />  
+        </p:column>  
+           
+         <p:column headerText="Estado">  
+             <h:outputText value="#{vehiculos.estadoVehiculo}" />  
+         </p:column>     
+    </p:dataTable>  
+</h:form> 
+    </h:body>
+</html>
+

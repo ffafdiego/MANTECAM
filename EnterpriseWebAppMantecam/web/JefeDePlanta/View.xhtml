@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewJefeDePlantaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewJefeDePlantaLabel_idUsario}"/>
+                    <h:outputText value="#{jefeDePlantaController.selected.idUsario}" title="#{bundle.ViewJefeDePlantaTitle_idUsario}"/>
+                    <h:outputText value="#{bundle.ViewJefeDePlantaLabel_username}"/>
+                    <h:outputText value="#{jefeDePlantaController.selected.username}" title="#{bundle.ViewJefeDePlantaTitle_username}"/>
+                    <h:outputText value="#{bundle.ViewJefeDePlantaLabel_pass}"/>
+                    <h:outputText value="#{jefeDePlantaController.selected.pass}" title="#{bundle.ViewJefeDePlantaTitle_pass}"/>
+                    <h:outputText value="#{bundle.ViewJefeDePlantaLabel_nombreJplanta}"/>
+                    <h:outputText value="#{jefeDePlantaController.selected.nombreJplanta}" title="#{bundle.ViewJefeDePlantaTitle_nombreJplanta}"/>
+                    <h:outputText value="#{bundle.ViewJefeDePlantaLabel_apellidoJplanta}"/>
+                    <h:outputText value="#{jefeDePlantaController.selected.apellidoJplanta}" title="#{bundle.ViewJefeDePlantaTitle_apellidoJplanta}"/>
+                    <h:outputText value="#{bundle.ViewJefeDePlantaLabel_telefonoJplanta}"/>
+                    <h:outputText value="#{jefeDePlantaController.selected.telefonoJplanta}" title="#{bundle.ViewJefeDePlantaTitle_telefonoJplanta}"/>
+                    <h:outputText value="#{bundle.ViewJefeDePlantaLabel_usuario}"/>
+                    <h:outputText value="#{jefeDePlantaController.selected.usuario}" title="#{bundle.ViewJefeDePlantaTitle_usuario}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{jefeDePlantaController.destroyAndView}" value="#{bundle.ViewJefeDePlantaDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewJefeDePlantaEditLink}"/>
+                <br />
+                <h:commandLink action="#{jefeDePlantaController.prepareCreate}" value="#{bundle.ViewJefeDePlantaCreateLink}" />
+                <br />
+                <h:commandLink action="#{jefeDePlantaController.prepareList}" value="#{bundle.ViewJefeDePlantaShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewJefeDePlantaIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
