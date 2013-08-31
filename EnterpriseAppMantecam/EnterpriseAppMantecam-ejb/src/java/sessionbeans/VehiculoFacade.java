@@ -17,23 +17,24 @@ import javax.persistence.Query;
  */
 @Stateless
 public class VehiculoFacade extends AbstractFacade<Vehiculo> implements VehiculoFacadeLocal {
+
     @PersistenceContext(unitName = "EnterpriseAppMantecam-ejbPU")
     private EntityManager em;
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }  
-    
+    }
+
     public VehiculoFacade() {
         super(Vehiculo.class);
     }
 
     @Override
     public List<Vehiculo> buscarPorPatente(String patente) {
-        
+
         Query query;
-        
+
         query = em.createNamedQuery("Vehiculo.findByPatente")
                 .setParameter("patente", patente);
         return query.getResultList();
@@ -41,12 +42,19 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> implements Vehiculo
 
     @Override
     public List<Vehiculo> buscarPorMarca(String marca) {
-            Query query;        
+        Query query;
         query = em.createNamedQuery("Vehiculo.findByMarca")
-                .setParameter("marca",marca );
+                .setParameter("marca", marca);
         return query.getResultList();
     }
-    }
     
+    @Override
+    public List<Vehiculo> buscarVehiculo(Integer idVehiculo){
+        Query query;
+        query = em.createNamedQuery("Vehiculo.findByIdVehiculo")
+                .setParameter("idVehiculo",idVehiculo );    
+        return query.getResultList();  
+    }
+}
     
 

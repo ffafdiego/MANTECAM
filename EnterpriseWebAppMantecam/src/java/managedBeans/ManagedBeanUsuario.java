@@ -98,5 +98,7 @@ public class ManagedBeanUsuario {
     public void setTecnicoMecanico(TecnicoMecanico tecnicoMecanico) {
         this.tecnicoMecanico = tecnicoMecanico;
     }
+   
+    
     
 }

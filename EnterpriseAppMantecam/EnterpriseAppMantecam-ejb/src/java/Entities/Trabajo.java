@@ -24,13 +24,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Pablitolog
+ * @author Diego
  */
 @Entity
 @Table(name = "trabajo")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Trabajo.obtenerVehiculos", query = "SELECT v FROM Vehiculo v"),
     @NamedQuery(name = "Trabajo.findAll", query = "SELECT t FROM Trabajo t"),
     @NamedQuery(name = "Trabajo.findByIdTrabajo", query = "SELECT t FROM Trabajo t WHERE t.idTrabajo = :idTrabajo"),
     @NamedQuery(name = "Trabajo.findByDescripcion", query = "SELECT t FROM Trabajo t WHERE t.descripcion = :descripcion"),
@@ -70,7 +69,10 @@ public class Trabajo implements Serializable {
 
     public Trabajo() {
     }
-    
+
+    public Trabajo(Integer idTrabajo) {
+        this.idTrabajo = idTrabajo;
+    }
     public Trabajo(String descripcion, Date fechaTrabajo, Date horaIngreso, Date horaSalida, String lugar, String estadoTrabajo) {
         this.descripcion = descripcion;
         this.fechaTrabajo = fechaTrabajo;
@@ -81,7 +83,6 @@ public class Trabajo implements Serializable {
        
     }
 
-  
     public Integer getIdTrabajo() {
         return idTrabajo;
     }
@@ -169,10 +170,6 @@ public class Trabajo implements Serializable {
     @Override
     public String toString() {
         return "Entities.Trabajo[ idTrabajo=" + idTrabajo + " ]";
-    }
-
-    public void setIdVehiculo(Integer idVehiculo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -38,7 +38,7 @@ public class ManagedBeanVehiculo {
     private final static String[] estado_vehiculos;
     private Item item,aceite,afinamiento,freno,neumatico,amortiguacion,circuito;
     private List<Vehiculo> vehiculos;
-    private Vehiculo auxiliar;
+    private Vehiculo auxiliar, camion;
     private Tipoitem tipoItem;   
     static{
         estado_vehiculos = new String[3];
@@ -47,7 +47,7 @@ public class ManagedBeanVehiculo {
         estado_vehiculos[2] = "De Baja";   
     }
     
-        public ManagedBeanVehiculo() {
+    public ManagedBeanVehiculo() {
     }
             
     
@@ -83,6 +83,14 @@ public class ManagedBeanVehiculo {
 
     public void setMarca(String marca) {
         this.marca = marca;
+    }
+
+    public Vehiculo getCamion() {
+        return camion;
+    }
+
+    public void setCamion(Vehiculo camion) {
+        this.camion = camion;
     }
 
     public String getModelo() {
@@ -149,6 +157,7 @@ public class ManagedBeanVehiculo {
         this.vehiculos = vehiculos;
     }
 
+    
       public void nuevoVehiculo(){
        //Creando Vehículo
        Vehiculo vehiculo;
@@ -170,10 +179,12 @@ public class ManagedBeanVehiculo {
        nuevoItem(auxiliar, km,tipoItem);
        tipoItem = new Tipoitem(6);
        nuevoItem(auxiliar, km,tipoItem);
+       
           
        //id para crear items de vehículo cread 
        
       }
+    
       public void nuevoItem(Vehiculo idV,Integer km,Tipoitem tipo){
       
       item = new Item("Nuevo", 0 , "Nuevito", null , km);
@@ -185,11 +196,9 @@ public class ManagedBeanVehiculo {
       itemFacade.create(item);
       }
       
-      public void editarChoferVehiculo(Integer idVehiculo){
-          
-      
-      
+      public void editarChoferVehiculo(Integer idVehiculo){ 
       }
+     
       
       public void mostrarMensaje(String men){
         FacesMessage msg = new FacesMessage(men);        
@@ -207,8 +216,7 @@ public class ManagedBeanVehiculo {
         Vehiculo vehiculo = (Vehiculo) event.getObject();
         vehiculoFacade.edit(vehiculo);        
         
-        FacesMessage msg = new FacesMessage("Vehículo Editado");
-        
+        FacesMessage msg = new FacesMessage("Vehículo Editado");        
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
       

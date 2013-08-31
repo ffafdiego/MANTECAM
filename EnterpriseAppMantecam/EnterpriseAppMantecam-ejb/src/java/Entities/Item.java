@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Pablitolog
+ * @author Diego
  */
 @Entity
 @Table(name = "item")
@@ -34,13 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Item.findByIdItem", query = "SELECT i FROM Item i WHERE i.idItem = :idItem"),
     @NamedQuery(name = "Item.findByDescripcionItem", query = "SELECT i FROM Item i WHERE i.descripcionItem = :descripcionItem"),
     @NamedQuery(name = "Item.findByFecha", query = "SELECT i FROM Item i WHERE i.fecha = :fecha"),
-    @NamedQuery(name = "Item.findByKilometrajeLimite", query = "SELECT i FROM Item i WHERE i.kilometrajeLimite = :kilometrajeLimite")})
+    @NamedQuery(name = "Item.findByKilometrajeLimite", query = "SELECT i FROM Item i WHERE i.kilometrajeLimite = :kilometrajeLimite"),
+    @NamedQuery(name = "Item.findByEstadoItem", query = "SELECT i FROM Item i WHERE i.estadoItem = :estadoItem"),
+    @NamedQuery(name = "Item.findByCantidadRevisiones", query = "SELECT i FROM Item i WHERE i.cantidadRevisiones = :cantidadRevisiones")})
 public class Item implements Serializable {
-    @Size(max = 1024)
-    @Column(name = "ESTADO_ITEM")
-    private String estadoItem;
-    @Column(name = "CANTIDAD_REVISIONES")
-    private Integer cantidadRevisiones;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,6 +52,11 @@ public class Item implements Serializable {
     private Date fecha;
     @Column(name = "KILOMETRAJE_LIMITE")
     private Integer kilometrajeLimite;
+    @Size(max = 1024)
+    @Column(name = "ESTADO_ITEM")
+    private String estadoItem;
+    @Column(name = "CANTIDAD_REVISIONES")
+    private Integer cantidadRevisiones;
     @JoinColumn(name = "ID_VEHICULO", referencedColumnName = "ID_VEHICULO")
     @ManyToOne
     private Vehiculo idVehiculo;
@@ -62,15 +64,6 @@ public class Item implements Serializable {
     @ManyToOne
     private Tipoitem idTipoitem;
 
-    public Item(String estadoItem, Integer cantidadRevisiones, String descripcionItem, Date fecha, Integer kilometrajeLimite) {
-        this.estadoItem = estadoItem;
-        this.cantidadRevisiones = cantidadRevisiones;
-        this.descripcionItem = descripcionItem;
-        this.fecha = fecha;
-        this.kilometrajeLimite = kilometrajeLimite;
-    }
-
-  
     public Item() {
     }
 
@@ -78,6 +71,15 @@ public class Item implements Serializable {
         this.idItem = idItem;
     }
 
+    public Item(String descripcionItem, Integer cantidadRevisiones, String estadoItem, Date fecha, Integer kilometrajeLimite) {
+        this.descripcionItem = descripcionItem;
+        this.fecha = fecha;
+        this.kilometrajeLimite = kilometrajeLimite;
+        this.estadoItem = estadoItem;
+        this.cantidadRevisiones = cantidadRevisiones;
+    }
+    
+    
     public Integer getIdItem() {
         return idItem;
     }
@@ -110,6 +112,22 @@ public class Item implements Serializable {
         this.kilometrajeLimite = kilometrajeLimite;
     }
 
+    public String getEstadoItem() {
+        return estadoItem;
+    }
+
+    public void setEstadoItem(String estadoItem) {
+        this.estadoItem = estadoItem;
+    }
+
+    public Integer getCantidadRevisiones() {
+        return cantidadRevisiones;
+    }
+
+    public void setCantidadRevisiones(Integer cantidadRevisiones) {
+        this.cantidadRevisiones = cantidadRevisiones;
+    }
+
     public Vehiculo getIdVehiculo() {
         return idVehiculo;
     }
@@ -124,21 +142,6 @@ public class Item implements Serializable {
 
     public void setIdTipoitem(Tipoitem idTipoitem) {
         this.idTipoitem = idTipoitem;
-    }
-     public String getEstadoItem() {
-        return estadoItem;
-    }
-
-    public void setEstadoItem(String estadoItem) {
-        this.estadoItem = estadoItem;
-    }
-
-    public Integer getCantidadRevisiones() {
-        return cantidadRevisiones;
-    }
-
-    public void setCantidadRevisiones(Integer cantidadRevisiones) {
-        this.cantidadRevisiones = cantidadRevisiones;
     }
 
     @Override
@@ -165,7 +168,5 @@ public class Item implements Serializable {
     public String toString() {
         return "Entities.Item[ idItem=" + idItem + " ]";
     }
-
-   
     
 }

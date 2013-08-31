@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    
+    <h:head>
+        <title>Detalle de Piezas de Camión</title>
+    </h:head>
+    <h:body>
+   <h:form>  
+       <p:dataTable var="item" value="">             
+        <p:column headerText="Patente">  
+            <h:outputText value="#{m}" />  
+        </p:column>  
+  
+        <p:column headerText="Marca">  
+            <h:outputText value="#{item.descripcionItem}" />  
+        </p:column>  
+  
+        <p:column headerText="Modelo">  
+            
+        <h:outputText value="#{item.fecha}">
+            <f:convertDateTime pattern="dd/MM/yyyy" />
+        </h:outputText>
+        </p:column>  
+  
+        <p:column headerText="Año">  
+            <h:outputText value="#{item.estadoItem}" />  
+        </p:column> 
+      
+           
+          
+    </p:dataTable>  
+</h:form> 
+    </h:body>
+</html>
+

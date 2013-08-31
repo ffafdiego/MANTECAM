@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Pablitolog
+ * @author Diego
  */
 @Entity
 @Table(name = "vehiculo")
@@ -81,8 +81,7 @@ public class Vehiculo implements Serializable {
     public Vehiculo(Integer idVehiculo) {
         this.idVehiculo = idVehiculo;
     }
-
-    public Vehiculo(String patente, String marca, String modelo, Integer ano, Integer kilometrajeVehiculo, String chofer, String estadoVehiculo) {
+ public Vehiculo(String patente, String marca, String modelo, Integer ano, Integer kilometrajeVehiculo, String chofer, String estadoVehiculo) {
         this.patente = patente;
         this.marca = marca;
         this.modelo = modelo;
@@ -92,9 +91,6 @@ public class Vehiculo implements Serializable {
         this.estadoVehiculo = estadoVehiculo;
        
     }
-
-    
-
     public Integer getIdVehiculo() {
         return idVehiculo;
     }

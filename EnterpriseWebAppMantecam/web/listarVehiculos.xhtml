@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -31,7 +32,12 @@
            
          <p:column headerText="Estado">  
              <h:outputText value="#{vehiculos.estadoVehiculo}" />  
-         </p:column>     
+         </p:column>
+         <p:column headerText="">
+             <h:commandButton value="Ver Detalle" action="detalleCamion?faces-redirect=true" >
+                 <f:param name="Camion" value="#{vehiculos}"/>
+             </h:commandButton>
+        </p:column>
     </p:dataTable>  
 </h:form> 
     </h:body>

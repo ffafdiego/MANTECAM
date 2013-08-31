@@ -8,8 +8,12 @@ import Entities.Item;
 import Entities.Tipoitem;
 import Entities.Vehiculo;
 import java.util.Date;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import sessionbeans.ItemFacadeLocal;
 
 /**
  *
@@ -18,13 +22,33 @@ import javax.enterprise.context.RequestScoped;
 @Named(value = "managedBeanItem")
 @RequestScoped
 public class ManagedBeanItem {
+    @EJB
+    private ItemFacadeLocal itemFacade;
     
     private String descripcionItem;
     private Date fecha;
     private Integer kilometrajeLimite;
     private Vehiculo idVehiculo;
     private Tipoitem idTipoitem;
+    private List<Item> items;
+    
+    
+    
+    public ManagedBeanItem( ) {
+    }
+    @PostConstruct
+    public void init(){
+        items = itemFacade.findAll();
+    }
 
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+    
     public String getDescripcionItem() {
         return descripcionItem;
     }
@@ -65,15 +89,18 @@ public class ManagedBeanItem {
         this.idTipoitem = idTipoitem;
     }
             
-    public ManagedBeanItem( ) {
-    }
-    
+   
     
     public void nuevoItem(Vehiculo idCamion){
         Item item;
-   
+                 
+    }
+    
+    public void detalleCamion(Vehiculo idVehiculo){
         
-          
+        
+        
+        
     }
     
     

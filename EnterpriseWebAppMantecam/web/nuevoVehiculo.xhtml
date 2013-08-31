@@ -37,14 +37,15 @@
                     <h:form>
                         <p:growl id="messages" showDetail="true"/>  
                         <h:panelGrid columns="2">
+                            
                             <h:outputLabel value="Patente*"  /> 
-                            <p:inputText value="#{managedBeanVehiculo.patente}" />
+                            <p:inputMask value="#{managedBeanVehiculo.patente}" mask="aa-**-99"/>
                             <h:outputLabel value="Marca*"/>
                             <p:inputText value="#{managedBeanVehiculo.marca}" />
                             <h:outputLabel value="Modelo*"/> 
                             <p:inputText value="#{managedBeanVehiculo.modelo}"/>
                             <h:outputLabel value="Año*"/> 
-                            <p:inputText value="#{managedBeanVehiculo.ano}" />  
+                            <p:inputMask value="#{managedBeanVehiculo.ano}" mask="9999" />  
                             <h:outputLabel value="Kilometraje del Vehiculo*"/> 
                             <p:inputText value="#{managedBeanVehiculo.kilometraje_vehiculo}"/>
                             <h:outputLabel value="Chofer del Vehiculo*"/> 

@@ -33,9 +33,8 @@ public class ManagedBeanTrabajo {
     private String lugar;
     private String estadoTrabajo;
     private Vehiculo idVehiculo;
-    private List<Vehiculo> vehiculos;
+    private List<Vehiculo> vehiculos, vehiculoDeTrabajo;
     private List<Trabajo> trabajos;
-    private List<Trabajo> filtrado;
     private Integer auxiliar;
     private Vehiculo carro;
 
@@ -151,6 +150,21 @@ public class ManagedBeanTrabajo {
         trabajoFacade.create(trabajo);
                 
     }    
+    
+    public void obtenerTrabajo(Integer id){
+        
+        vehiculoDeTrabajo = vehiculoFacade.buscarVehiculo(1);
+        System.out.println(vehiculoDeTrabajo);
+        
+    }
+    
+    
+    
+    public void editarTrabajo(Integer idTrabajo){
+        System.out.println(idTrabajo);                
+    }    
+    
+    
 
     public ManagedBeanTrabajo() {
     }

@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Pablitolog
+ * @author Diego
  */
 @Entity
 @Table(name = "jefe_de_planta")
@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "JefeDePlanta.findAll", query = "SELECT j FROM JefeDePlanta j"),
     @NamedQuery(name = "JefeDePlanta.findByIdUsario", query = "SELECT j FROM JefeDePlanta j WHERE j.idUsario = :idUsario"),
+    @NamedQuery(name = "JefeDePlanta.findByIdTipoUsuario", query = "SELECT j FROM JefeDePlanta j WHERE j.idTipoUsuario = :idTipoUsuario"),
     @NamedQuery(name = "JefeDePlanta.findByUsername", query = "SELECT j FROM JefeDePlanta j WHERE j.username = :username"),
     @NamedQuery(name = "JefeDePlanta.findByPass", query = "SELECT j FROM JefeDePlanta j WHERE j.pass = :pass"),
     @NamedQuery(name = "JefeDePlanta.findByNombreJplanta", query = "SELECT j FROM JefeDePlanta j WHERE j.nombreJplanta = :nombreJplanta"),
@@ -40,6 +41,8 @@ public class JefeDePlanta implements Serializable {
     @NotNull
     @Column(name = "ID_USARIO")
     private Integer idUsario;
+    @Column(name = "ID_TIPO_USUARIO")
+    private Integer idTipoUsuario;
     @Size(max = 1024)
     @Column(name = "USERNAME")
     private String username;
@@ -72,6 +75,14 @@ public class JefeDePlanta implements Serializable {
 
     public void setIdUsario(Integer idUsario) {
         this.idUsario = idUsario;
+    }
+
+    public Integer getIdTipoUsuario() {
+        return idTipoUsuario;
+    }
+
+    public void setIdTipoUsuario(Integer idTipoUsuario) {
+        this.idTipoUsuario = idTipoUsuario;
     }
 
     public String getUsername() {

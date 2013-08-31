@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Pablitolog
+ * @author Diego
  */
 @Entity
 @Table(name = "tecnico_mecanico")
@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "TecnicoMecanico.findAll", query = "SELECT t FROM TecnicoMecanico t"),
     @NamedQuery(name = "TecnicoMecanico.findByIdUsario", query = "SELECT t FROM TecnicoMecanico t WHERE t.idUsario = :idUsario"),
+    @NamedQuery(name = "TecnicoMecanico.findByIdTipoUsuario", query = "SELECT t FROM TecnicoMecanico t WHERE t.idTipoUsuario = :idTipoUsuario"),
     @NamedQuery(name = "TecnicoMecanico.findByUsername", query = "SELECT t FROM TecnicoMecanico t WHERE t.username = :username"),
     @NamedQuery(name = "TecnicoMecanico.findByPass", query = "SELECT t FROM TecnicoMecanico t WHERE t.pass = :pass"),
     @NamedQuery(name = "TecnicoMecanico.findByNombreTecnico", query = "SELECT t FROM TecnicoMecanico t WHERE t.nombreTecnico = :nombreTecnico"),
@@ -44,6 +45,8 @@ public class TecnicoMecanico implements Serializable {
     @NotNull
     @Column(name = "ID_USARIO")
     private Integer idUsario;
+    @Column(name = "ID_TIPO_USUARIO")
+    private Integer idTipoUsuario;
     @Size(max = 1024)
     @Column(name = "USERNAME")
     private String username;
@@ -81,6 +84,14 @@ public class TecnicoMecanico implements Serializable {
 
     public void setIdUsario(Integer idUsario) {
         this.idUsario = idUsario;
+    }
+
+    public Integer getIdTipoUsuario() {
+        return idTipoUsuario;
+    }
+
+    public void setIdTipoUsuario(Integer idTipoUsuario) {
+        this.idTipoUsuario = idTipoUsuario;
     }
 
     public String getUsername() {

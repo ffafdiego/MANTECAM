@@ -32,5 +32,7 @@ public interface VehiculoFacadeLocal {
     List<Vehiculo> buscarPorPatente(String Patente);
 
     List<Vehiculo> buscarPorMarca(String marca);
+
+    List<Vehiculo> buscarVehiculo(Integer idVehiculo);
     
 }
