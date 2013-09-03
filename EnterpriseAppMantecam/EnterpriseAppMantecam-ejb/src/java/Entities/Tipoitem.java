@@ -54,6 +54,11 @@ public class Tipoitem implements Serializable {
         this.idTipoitem = idTipoitem;
     }
 
+    public Tipoitem(Integer idTipoitem, Integer vidaUtil) {
+        this.idTipoitem = idTipoitem;
+        this.vidaUtil = vidaUtil;
+    }
+
     public Integer getIdTipoitem() {
         return idTipoitem;
     }

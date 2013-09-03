@@ -5,9 +5,12 @@
 package sessionbeans;
 
 import Entities.Item;
+import Entities.Vehiculo;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,5 +29,31 @@ public class ItemFacade extends AbstractFacade<Item> implements ItemFacadeLocal 
     public ItemFacade() {
         super(Item.class);
     }
+
+   
+    @Override
+    public List<Item> buscarPorChofer(Integer chofer) {
+        Query query;
+        query = em.createNamedQuery("Item.findByChofer")
+                .setParameter("chofer", chofer);
+        return query.getResultList();
+    }
+    
+    @Override
+    public void revisarKmPiezas(Vehiculo camion){  
+        Query query;
+        query = em.createNamedQuery("Item.findByChofer")
+                .setParameter("chofer", camion.getIdVehiculo());
+       
+        
+        System.out.println(query.getResultList().listIterator());
+        
+        
+    
+    
+    }
+
+  
+   
     
 }

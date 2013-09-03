@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Mantecam</title>
+                
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <a href="http://localhost:8080/EnterpriseWebAppMantecam/"><img src="resources/mantecam.jpg" width="1350" height="82" alt="mantecam"/>
+                    </a>       
+                </p:layoutUnit>
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+                <p:layoutUnit position="west" size="250" header="Menú" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Mantecam">
+                            <p:menuitem value="Ingresar Vehiculo" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/nuevoVehiculo.xhtml" />
+                            <p:menuitem value="Ver Listado de Vehículos" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/listarVehiculos.xhtml" />
+                            <p:menuitem value="Agregar Trabajo" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/nuevoTrabajo.xhtml" />
+                            <p:menuitem value="Ver Listado de Trabajos" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/listarTareas.xhtml" />
+                        </p:submenu>
+                    </p:menu>
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <h:form>
+                        <p:growl id="messages" showDetail="true"/>  
+                        <h:panelGrid columns="2">      
+                            <h:outputLabel value="Vehículo"  /> 
+                            <h:selectOneMenu value="#{id_vehiculo}"  >
+                             <f:selectItems value="#{managedBeanTrabajo.vehiculos}" var="user" itemValue="#{user.idVehiculo}" itemLabel="Patente: #{user.patente} Modelo: #{user.modelo} "/>
+                             </h:selectOneMenu>
+                            <h:outputLabel for="minmax" value="Kilometraje Recorrido"  />                             
+                            <p:spinner id="minmax" value="#{kilometraje}" min="1"  />  
+                            <p:commandButton value="Ingresar" action="#{managedBeanVehiculo.agregarKm(id_vehiculo,kilometraje)}"/>
+                        </h:panelGrid>
+                    </h:form >
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>
+

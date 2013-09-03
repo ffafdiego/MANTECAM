@@ -5,6 +5,7 @@
 package sessionbeans;
 
 import Entities.Item;
+import Entities.Vehiculo;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -27,6 +28,10 @@ public interface ItemFacadeLocal {
 
     List<Item> findRange(int[] range);
 
-    int count();
-    
+    int count();   
+
+    public List<Item> buscarPorChofer(Integer chofer);
+
+    public void revisarKmPiezas(Vehiculo camion);
+
 }

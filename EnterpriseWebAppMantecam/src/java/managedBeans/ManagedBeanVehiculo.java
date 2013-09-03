@@ -18,6 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 import sessionbeans.ItemFacadeLocal;
+import sessionbeans.TipoitemFacadeLocal;
 import sessionbeans.VehiculoFacadeLocal;
 
 /**
@@ -28,6 +29,8 @@ import sessionbeans.VehiculoFacadeLocal;
 @RequestScoped
 public class ManagedBeanVehiculo {
     @EJB
+    private TipoitemFacadeLocal tipoitemFacade;
+    @EJB
     private ItemFacadeLocal itemFacade;
     @EJB
     private VehiculoFacadeLocal vehiculoFacade;
@@ -36,9 +39,9 @@ public class ManagedBeanVehiculo {
     private Integer kilometraje_vehiculo, ano, hola;
     private String chofer, estado_vehiculo, modelo, marca, patente;
     private final static String[] estado_vehiculos;
-    private Item item,aceite,afinamiento,freno,neumatico,amortiguacion,circuito;
+    private Item item;
     private List<Vehiculo> vehiculos;
-    private Vehiculo auxiliar, camion;
+    private Vehiculo auxiliar, camion, seleccionado;
     private Tipoitem tipoItem;   
     static{
         estado_vehiculos = new String[3];
@@ -58,6 +61,14 @@ public class ManagedBeanVehiculo {
     
     public String[] getEstado_vehiculos(){
         return estado_vehiculos;    
+    }
+
+    public Vehiculo getSeleccionado() {
+        return seleccionado;
+    }
+
+    public void setSeleccionado(Vehiculo seleccionado) {
+        this.seleccionado = seleccionado;
     }
     
     public Integer getHola() {
@@ -156,7 +167,16 @@ public class ManagedBeanVehiculo {
     public void setVehiculos(List<Vehiculo> vehiculos) {
         this.vehiculos = vehiculos;
     }
-
+    public void agregarKm(Integer id,Integer km){
+        camion = vehiculoFacade.find(id);
+        camion.setKilometrajeVehiculo(camion.getKilometrajeVehiculo()+km);
+        vehiculoFacade.edit(camion);
+        itemFacade.revisarKmPiezas(camion);
+        
+    
+    
+    
+    }
     
       public void nuevoVehiculo(){
        //Creando Vehículo
@@ -168,27 +188,41 @@ public class ManagedBeanVehiculo {
        Integer km = vehiculo.getKilometrajeVehiculo();
        auxiliar = new Vehiculo(vehiculo.getIdVehiculo());
        tipoItem = new Tipoitem(1);
-       nuevoItem(auxiliar, km,tipoItem);
-       tipoItem = new Tipoitem(2);
-       nuevoItem(auxiliar, km,tipoItem);
-       tipoItem = new Tipoitem(3);
-       nuevoItem(auxiliar, km,tipoItem);
-       tipoItem = new Tipoitem(4);
-       nuevoItem(auxiliar, km,tipoItem);
-       tipoItem = new Tipoitem(5);
-       nuevoItem(auxiliar, km,tipoItem);
-       tipoItem = new Tipoitem(6);
-       nuevoItem(auxiliar, km,tipoItem);
+       Tipoitem tipo = tipoitemFacade.find(1);       
+       Integer km_pieza = tipo.getVidaUtil();          
+       nuevoItem(auxiliar, km+km_pieza,tipoItem);
        
+       tipoItem = new Tipoitem(2);
+       tipo = tipoitemFacade.find(2);       
+       km_pieza = tipo.getVidaUtil();          
+       nuevoItem(auxiliar, km+km_pieza,tipoItem);
+       
+       tipoItem = new Tipoitem(3);
+       tipo = tipoitemFacade.find(3);       
+       km_pieza = tipo.getVidaUtil();          
+       nuevoItem(auxiliar, km+km_pieza,tipoItem);
+       
+       tipoItem = new Tipoitem(4);
+       tipo = tipoitemFacade.find(4);       
+       km_pieza = tipo.getVidaUtil();          
+       nuevoItem(auxiliar, km+km_pieza,tipoItem);
+     
+       tipoItem = new Tipoitem(5);
+       tipo = tipoitemFacade.find(5);       
+       km_pieza = tipo.getVidaUtil();          
+       nuevoItem(auxiliar, km+km_pieza,tipoItem);
           
+       tipoItem = new Tipoitem(6);
+       tipo = tipoitemFacade.find(6);       
+       km_pieza = tipo.getVidaUtil();          
+       nuevoItem(auxiliar, km+km_pieza,tipoItem);
        //id para crear items de vehículo cread 
        
       }
     
       public void nuevoItem(Vehiculo idV,Integer km,Tipoitem tipo){
       
-      item = new Item("Nuevo", 0 , "Nuevito", null , km);
-    
+      item = new Item("Pieza Nueva", 0 , "Ok", null , km);    
       java.util.Date fecha = new Date();
       item.setFecha(fecha);     
       item.setIdVehiculo(idV);
@@ -198,9 +232,9 @@ public class ManagedBeanVehiculo {
       
       public void editarChoferVehiculo(Integer idVehiculo){ 
       }
-     
       
-      public void mostrarMensaje(String men){
+      
+     public void mostrarMensaje(String men){
         FacesMessage msg = new FacesMessage(men);        
         FacesContext.getCurrentInstance().addMessage(null, msg);  
       

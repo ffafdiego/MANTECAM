@@ -14,6 +14,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import sessionbeans.ItemFacadeLocal;
+import sessionbeans.VehiculoFacadeLocal;
 
 /**
  *
@@ -24,13 +25,16 @@ import sessionbeans.ItemFacadeLocal;
 public class ManagedBeanItem {
     @EJB
     private ItemFacadeLocal itemFacade;
+    @EJB
+    private VehiculoFacadeLocal vehiculoFacade;
     
     private String descripcionItem;
     private Date fecha;
     private Integer kilometrajeLimite;
-    private Vehiculo idVehiculo;
+    private Vehiculo idVehiculo, seleccionado;
     private Tipoitem idTipoitem;
-    private List<Item> items;
+    private List<Item> items,listita;
+    
     
     
     
@@ -39,10 +43,27 @@ public class ManagedBeanItem {
     @PostConstruct
     public void init(){
         items = itemFacade.findAll();
+        
+    }
+
+    public List<Item> getListita() {
+        return listita;
+    }
+
+    public void setListita(List<Item> listita) {
+        this.listita = listita;
     }
 
     public List<Item> getItems() {
         return items;
+    }
+
+    public Vehiculo getSeleccionado() {
+        return seleccionado;
+    }
+
+    public void setSeleccionado(Vehiculo seleccionado) {
+        this.seleccionado = seleccionado;
     }
 
     public void setItems(List<Item> items) {
@@ -88,20 +109,13 @@ public class ManagedBeanItem {
     public void setIdTipoitem(Tipoitem idTipoitem) {
         this.idTipoitem = idTipoitem;
     }
-            
+    public String verDetalle(Integer idV){
+        listita = itemFacade.buscarPorChofer(idV);
+        System.out.println(listita);       
+        return "detalleCamion?faces-redirect=false";
+       
+    }
+    
    
-    
-    public void nuevoItem(Vehiculo idCamion){
-        Item item;
-                 
-    }
-    
-    public void detalleCamion(Vehiculo idVehiculo){
-        
-        
-        
-        
-    }
-    
     
 }

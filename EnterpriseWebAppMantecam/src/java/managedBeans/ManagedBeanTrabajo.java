@@ -42,7 +42,7 @@ public class ManagedBeanTrabajo {
     @PostConstruct
     public void init(){
         trabajos =  trabajoFacade.findAll();
-        vehiculos = trabajoFacade.obtenerVehiculos();
+        vehiculos = vehiculoFacade.findAll();
     }
     
 

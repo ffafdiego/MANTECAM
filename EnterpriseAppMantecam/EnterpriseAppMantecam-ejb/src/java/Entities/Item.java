@@ -36,6 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Item.findByFecha", query = "SELECT i FROM Item i WHERE i.fecha = :fecha"),
     @NamedQuery(name = "Item.findByKilometrajeLimite", query = "SELECT i FROM Item i WHERE i.kilometrajeLimite = :kilometrajeLimite"),
     @NamedQuery(name = "Item.findByEstadoItem", query = "SELECT i FROM Item i WHERE i.estadoItem = :estadoItem"),
+    @NamedQuery(name = "Item.findByChofer",query ="SELECT i FROM Item i JOIN i.idVehiculo v WHERE v.idVehiculo = :chofer "),
+    //ESTE CHOFER ES POR ID DE VEHICULO CAMBIAR NOMBRE TÚ QUE ESTAS LEYENDO NO TE ENOJES POR MIS MALAS PRACTICAS
     @NamedQuery(name = "Item.findByCantidadRevisiones", query = "SELECT i FROM Item i WHERE i.cantidadRevisiones = :cantidadRevisiones")})
 public class Item implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -70,7 +72,6 @@ public class Item implements Serializable {
     public Item(Integer idItem) {
         this.idItem = idItem;
     }
-
     public Item(String descripcionItem, Integer cantidadRevisiones, String estadoItem, Date fecha, Integer kilometrajeLimite) {
         this.descripcionItem = descripcionItem;
         this.fecha = fecha;
@@ -78,7 +79,6 @@ public class Item implements Serializable {
         this.estadoItem = estadoItem;
         this.cantidadRevisiones = cantidadRevisiones;
     }
-    
     
     public Integer getIdItem() {
         return idItem;

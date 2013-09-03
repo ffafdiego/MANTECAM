@@ -55,6 +55,12 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> implements Vehiculo
                 .setParameter("idVehiculo",idVehiculo );    
         return query.getResultList();  
     }
+    
+    public void revisarKmPiezas(Vehiculo camion){
+       
+    
+    
+    }
 }
     
 

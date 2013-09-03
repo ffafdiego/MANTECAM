@@ -30,11 +30,5 @@ public class TrabajoFacade extends AbstractFacade<Trabajo> implements TrabajoFac
         super(Trabajo.class);
     }
 
-    @Override
-    public List<Vehiculo> obtenerVehiculos() {
-        Query query;
-        
-        query = em.createNamedQuery("Trabajo.obtenerVehiculos");                
-        return query.getResultList();       
-    }    
+
 }

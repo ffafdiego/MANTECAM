@@ -29,7 +29,5 @@ public interface TrabajoFacadeLocal {
     List<Trabajo> findRange(int[] range);
 
     int count();
-
-    List<Vehiculo> obtenerVehiculos();
     
 }

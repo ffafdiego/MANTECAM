@@ -34,8 +34,8 @@
              <h:outputText value="#{vehiculos.estadoVehiculo}" />  
          </p:column>
          <p:column headerText="">
-             <h:commandButton value="Ver Detalle" action="detalleCamion?faces-redirect=true" >
-                 <f:param name="Camion" value="#{vehiculos}"/>
+             <h:commandButton value="Ver Detalle" action="#{managedBeanItem.verDetalle(vehiculos.idVehiculo)}" >
+                 
              </h:commandButton>
         </p:column>
     </p:dataTable>  

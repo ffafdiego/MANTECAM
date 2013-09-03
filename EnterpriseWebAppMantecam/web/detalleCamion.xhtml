@@ -2,39 +2,56 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
-    
-    
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
     <h:head>
-        <title>Detalle de Piezas de Camión</title>
+        <title>Facelet Title</title>
     </h:head>
     <h:body>
-   <h:form>  
-       <p:dataTable var="item" value="">             
-        <p:column headerText="Patente">  
-            <h:outputText value="#{m}" />  
-        </p:column>  
-  
-        <p:column headerText="Marca">  
-            <h:outputText value="#{item.descripcionItem}" />  
-        </p:column>  
-  
-        <p:column headerText="Modelo">  
-            
-        <h:outputText value="#{item.fecha}">
-            <f:convertDateTime pattern="dd/MM/yyyy" />
-        </h:outputText>
-        </p:column>  
-  
-        <p:column headerText="Año">  
-            <h:outputText value="#{item.estadoItem}" />  
-        </p:column> 
-      
-           
-          
-    </p:dataTable>  
-</h:form> 
+        <h:form prependId="false">  
+            <p:dataTable id="dataTable" var="car" value="#{managedBeanItem.listita}"  >
+                        
+                <f:facet name="header">  
+                    Trabajos Asignados Para Los Camiones.  
+                </f:facet>  
+
+                <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="Nombre Item" />  
+                    </f:facet>  
+                    <h:outputText value="#{car.idTipoitem.nombreItem}" />  
+                </p:column>                
+                   <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="Descripción" />  
+                    </f:facet>  
+                       <h:outputText value="#{car.descripcionItem}" />  
+                </p:column>  
+                <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="Km de vida útil" />  
+                    </f:facet>                       
+                     <h:outputText value="#{car.kilometrajeLimite}"  />  
+                     
+                </p:column>  
+                 <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="Última Revisión" />  
+                    </f:facet>                       
+                     <h:outputText value="#{car.fecha.date}/#{car.fecha.month}/13"  />  
+                     
+                </p:column>  
+                
+                <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="Estado de la Pieza" />  
+                    </f:facet>  
+                    <h:outputText value="#{car.estadoItem}" />  
+                </p:column>  
+            </p:dataTable>  
+
+        </h:form>
     </h:body>
 </html>
 
