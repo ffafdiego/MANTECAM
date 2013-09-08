@@ -30,8 +30,10 @@ public interface ItemFacadeLocal {
 
     int count();   
 
-    public List<Item> buscarPorChofer(Integer chofer);
+    public Integer revisarKmPiezas(Vehiculo camion);
 
-    public void revisarKmPiezas(Vehiculo camion);
+    public Integer revisartodaslasPiezas(Vehiculo camion);
+
+    public List<Item> buscarPorVehiculo(Integer vehiculo);
 
 }

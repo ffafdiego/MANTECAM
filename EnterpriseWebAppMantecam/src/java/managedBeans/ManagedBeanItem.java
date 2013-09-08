@@ -15,6 +15,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import sessionbeans.ItemFacadeLocal;
 import sessionbeans.VehiculoFacadeLocal;
+import java.io.Serializable;
 
 /**
  *
@@ -34,7 +35,6 @@ public class ManagedBeanItem {
     private Vehiculo idVehiculo, seleccionado;
     private Tipoitem idTipoitem;
     private List<Item> items,listita;
-    
     
     
     
@@ -110,8 +110,10 @@ public class ManagedBeanItem {
         this.idTipoitem = idTipoitem;
     }
     public String verDetalle(Integer idV){
-        listita = itemFacade.buscarPorChofer(idV);
-        System.out.println(listita);       
+       
+        listita = itemFacade.buscarPorVehiculo(idV);     
+        seleccionado = vehiculoFacade.find(idV);
+        System.out.println(seleccionado);
         return "detalleCamion?faces-redirect=false";
        
     }

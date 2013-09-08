@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form prependId="false">  
+            <p:dataTable id="dataTable" var="revision" value="#{managedBeanRevision.revisiones}"  
+                         paginator="true" rows="10"  
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                         rowsPerPageTemplate="5,10,15" >  
+                <f:facet name="header">  
+                    Revisiones 
+                </f:facet>  
+
+                <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="Camión" />  
+                    </f:facet>  
+                    <h:outputText value="#{revision.idVehiculo.patente}" />  
+                </p:column>  
+
+                <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="Fecha" />  
+                    </f:facet>  
+                    <h:outputText value="#{revision.fechaRevision.day}/#{revision.fechaRevision.month}/13" />  
+                </p:column>  
+
+                <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="Usuario" />  
+                    </f:facet>  
+                    
+                    <h:outputText value="No Asignado" rendered="#{revision.idUsario == NULL}" />                     
+                    <h:outputText value="#{revision.idUsario.nombreTecnico} #{revision.idUsario.apellidoTecnico} " rendered="#{revision.idUsario != NULL}" />
+
+
+                      
+                </p:column>  
+
+                <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="Estado de la Revisión" />  
+                    </f:facet>  
+                    <h:outputText value="#{revision.estadoRevision}"  />  
+                </p:column>  
+                
+
+            </p:dataTable>  
+
+        </h:form>
+    </h:body>
+</html>
+

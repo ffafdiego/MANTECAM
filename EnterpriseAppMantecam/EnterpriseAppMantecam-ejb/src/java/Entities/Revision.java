@@ -57,6 +57,10 @@ public class Revision implements Serializable {
     public Revision() {
     }
 
+    public Revision(Vehiculo idVehiculo) {
+        this.idVehiculo = idVehiculo;
+    }
+
     public Revision(Integer idRevision) {
         this.idRevision = idRevision;
     }

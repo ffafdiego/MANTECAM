@@ -10,57 +10,83 @@
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>Mantecam</title>
-                
+                <style type="text/css">
+                .ui-widget{font-size:90% !important;}
+                .ui-layout-unit-content{background-image:url('resources/mantecam.jpg');}
+            </style>   
             </f:facet>
         </h:head>
         <h:body>
             <p:layout fullPage="true">
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    <a href="http://localhost:8080/EnterpriseWebAppMantecam/"><img src="resources/mantecam.jpg" width="1350" height="82" alt="mantecam"/>
-                    </a>       
+                <p:layoutUnit position="north" style="border: none !important;" >
+                    <img src="resources/mantecam.jpg" width="1350" height="82"  alt="mantecam"/>
+                          
                 </p:layoutUnit>
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
+                <p:layoutUnit position="south" size="30"  style="text-align: center; border:none ; font-size: 60%  !important;" collapsible="true">
+                        Desarrollado por Grupo 8 Ltda.
                 </p:layoutUnit>
-                <p:layoutUnit position="west" size="250" header="Menú" collapsible="true">
+                <p:layoutUnit position="west" size="180" header="Menú"  style="border: none !important;" collapsible="true">
                     <p:menu>
                         <p:submenu label="Mantecam">
-                            <p:menuitem value="Ingresar Vehiculo" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/nuevoVehiculo.xhtml" />
-                            <p:menuitem value="Ver Listado de Vehículos" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/listarVehiculos.xhtml" />
-                            <p:menuitem value="Agregar Trabajo" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/nuevoTrabajo.xhtml" />
-                            <p:menuitem value="Ver Listado de Trabajos" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/listarTareas.xhtml" />
+                            <p:menuitem value="Ingresar Vehiculo" url="nuevoVehiculo.xhtml" />
+                            <p:menuitem value="Ver Listado de Vehículos" url="listarVehiculos.xhtml" />
+                            <p:menuitem value="Agregar Trabajo" url="nuevoTrabajo.xhtml" />
+                            <p:menuitem value="Ver Listado de Trabajos" url="listarTareas.xhtml" />
 
                         </p:submenu>
                     </p:menu>
                 </p:layoutUnit>
-                <p:layoutUnit position="center">
-                    <h:form>
-                        <p:growl id="messages" showDetail="true"/>  
-                        <h:panelGrid columns="2">
-                            
+                <p:layoutUnit position="center " style="border: none !important;" header=" Agregar Nuevo Vehículo" minSize="500">   
+                    
+                    <h:form id="form1">
+                        <p:messages id="msgs" rendered="#{facesContext.validationFailed}" />  
+                        <p:growl id="msj" showDetail="true" rendered="#{not facesContext.validationFailed}"/>  
+                        <h:panelGrid columns="3">
+
                             <h:outputLabel value="Patente*"  /> 
-                            <p:inputMask value="#{managedBeanVehiculo.patente}" mask="aa-**-99"/>
+                            <p:inputMask value="#{managedBeanVehiculo.patente}" autocomplete="kk-50-34" id="Patente" label="Patente" required="true" mask="aa-**-99"/>
+                            <p/>
+                            
                             <h:outputLabel value="Marca*"/>
-                            <p:inputText value="#{managedBeanVehiculo.marca}" />
+                            <p:inputText value="#{managedBeanVehiculo.marca}" id="marca" label="Marca" required="true" >
+                                <f:validateLength minimum="2" />  
+                            </p:inputText>
+                            <p:message for="marca" id="msgSurname" display=""/>
+                            
+                            
                             <h:outputLabel value="Modelo*"/> 
-                            <p:inputText value="#{managedBeanVehiculo.modelo}"/>
-                            <h:outputLabel value="Año*"/> 
-                            <p:inputMask value="#{managedBeanVehiculo.ano}" mask="9999" />  
+                            <p:inputText value="#{managedBeanVehiculo.modelo}" label="Modelo" required="true"/> <p/>
+                            
+                            <h:outputLabel value="Año"/> 
+                            <p:inputMask value="#{managedBeanVehiculo.ano}" mask="9999" label="Año" />   <p/>
+                            
                             <h:outputLabel value="Kilometraje del Vehiculo*"/> 
-                            <p:inputText value="#{managedBeanVehiculo.kilometraje_vehiculo}"/>
+                            <p:spinner value="#{managedBeanVehiculo.kilometraje_vehiculo}" label="Kilometraje del Vehículo" min="0" required="true"/>
+                                
+                            <p/>
+                            
                             <h:outputLabel value="Chofer del Vehiculo*"/> 
-                            <p:inputText value="#{managedBeanVehiculo.chofer}"/>
+                            <p:inputText value="#{managedBeanVehiculo.chofer}"/> <p/>
+                            
                             <h:outputLabel value="Estado del Vehiculo*"/> 
                             <p:selectOneMenu value="#{managedBeanVehiculo.estado_vehiculo}">  
-                                <f:selectItem itemLabel="Selecciona Estado del Vehículo" itemValue="" />  
+                                <f:selectItem itemLabel="Selecciona Estado del Vehículo"  />  
                                 <f:selectItem itemLabel="Disponible" itemValue="Disponible" />  
                                 <f:selectItem itemLabel="No Disponible" itemValue="No Disponible" />  
                                 <f:selectItem itemLabel="De Baja" itemValue="De Baja" />  
-                            </p:selectOneMenu>
-
-                            <p:commandButton value="Ingresar" action="#{managedBeanVehiculo.nuevoVehiculo()}"/>
+                            </p:selectOneMenu> <p/>
+                            
+                            <p:commandButton value="Nuevo Vehículo" update="msj" onclick="confirmation.show()" type="button" />
+                            <p:commandButton value="Renovar Campos" type="reset" /> 
 
                         </h:panelGrid>
+                        <p:confirmDialog message="Estas seguro que deseas crear el Vehículo ?" header="Creando Vehículo" severity="alert" widgetVar="confirmation" appendToBody="true">  
+
+                            <p:commandButton value="Confirmar" update="form1" onclick="confirmation.hide()" 
+                                             actionListener="#{managedBeanVehiculo.nuevoVehiculo()}"/>  
+                            <p:commandButton value="Cancelar" onclick="confirmation.hide()" type="submit" />   
+
+                        </p:confirmDialog> 
                     </h:form >
                 </p:layoutUnit>
             </p:layout>
