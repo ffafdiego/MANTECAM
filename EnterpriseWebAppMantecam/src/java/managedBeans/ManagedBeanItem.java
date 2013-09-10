@@ -28,7 +28,6 @@ public class ManagedBeanItem {
     private ItemFacadeLocal itemFacade;
     @EJB
     private VehiculoFacadeLocal vehiculoFacade;
-    
     private String descripcionItem;
     private Date fecha;
     private Integer kilometrajeLimite;
@@ -109,14 +108,18 @@ public class ManagedBeanItem {
     public void setIdTipoitem(Tipoitem idTipoitem) {
         this.idTipoitem = idTipoitem;
     }
-    public String verDetalle(Integer idV){
-       
+    public String verDetalleRev(Vehiculo idV){       
+        listita = itemFacade.buscarPorVehiculo(idV.getIdVehiculo());     
+        seleccionado = vehiculoFacade.find(idV.getIdVehiculo());
+        return "detalleItem?faces-redirect=false";       
+    }
+    
+    public String verDetalle(Integer idV){       
         listita = itemFacade.buscarPorVehiculo(idV);     
         seleccionado = vehiculoFacade.find(idV);
-        System.out.println(seleccionado);
-        return "detalleCamion?faces-redirect=false";
-       
+        return "detalleCamion?faces-redirect=false";       
     }
+   
     
    
     

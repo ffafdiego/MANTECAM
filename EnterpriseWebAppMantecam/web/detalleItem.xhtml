@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Mantecam</title>
+                <style type="text/css">
+                    .ui-widget{font-size:90% !important;}
+                    .ui-layout-unit-content{background-image:url('resources/mantecam.jpg');}
+                </style>   
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" collapsible="true">
+                    <a href="http://localhost:8080/EnterpriseWebAppMantecam/"><img src="resources/mantecam.jpg" width="1350" height="82" alt="mantecam"/>
+                    </a>  
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100"  collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="180" header="Menú" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Mantecam">
+                            <p:menuitem value="Ingresar Vehiculo" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/nuevoVehiculo.xhtml" />
+                            <p:menuitem value="Ver Listado de Vehículos" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/listarVehiculos.xhtml" />
+                            <p:menuitem value="Agregar Trabajo" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/nuevoTrabajo.xhtml" />
+                            <p:menuitem value="Ver Listado de Trabajos" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/listarTareas.xhtml" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form prependId="false">  
+                        <p:dataTable id="dataTable" var="car" value="#{managedBeanItem.listita}"  >
+
+                            <f:facet name="header">  
+                                Detalle de piezas de Camión   <h:outputText value="con la patente #{managedBeanItem.seleccionado.patente}" />          
+                            </f:facet>  
+
+
+                            <p:column>  
+                                <f:facet name="header">  
+                                    <h:outputText value="Nombre Item" />  
+                                </f:facet>  
+                                <h:outputText value="#{car.idTipoitem.nombreItem}" />  
+                            </p:column>                
+                            <p:column>  
+                                <f:facet name="header">  
+                                    <h:outputText value="Descripción" />  
+                                </f:facet>  
+                                <h:outputText value="#{car.descripcionItem}" />  
+                            </p:column>  
+                            <p:column>  
+                                <f:facet name="header">  
+                                    <h:outputText value="Km de vida útil" />  
+                                </f:facet>                       
+                                <h:outputText value="#{car.kilometrajeLimite}"  />  
+
+                            </p:column>  
+                            <p:column>  
+                                <f:facet name="header">  
+                                    <h:outputText value="Última Revisión" />  
+                                </f:facet>                       
+                                <h:outputText value="#{car.fecha.date}/#{car.fecha.month}/13"  />  
+
+                            </p:column>  
+
+                            <p:column>  
+                                <f:facet name="header">  
+                                    <h:outputText value="Estado de la Pieza" />  
+                                </f:facet>  
+                                <h:outputText value="#{car.estadoItem}" />  
+                            </p:column>  
+                            
+                           
+                          
+                        </p:dataTable>  
+                        <p:commandButton value="Volver" action="#{managedBeanVehiculo.volverTecnico()}" icon="ui-icon-arrow-1-w" />
+                       
+                    </h:form>
+
+
+                </p:layoutUnit>
+
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+

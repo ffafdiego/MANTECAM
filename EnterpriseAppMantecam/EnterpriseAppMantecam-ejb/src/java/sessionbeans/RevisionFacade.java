@@ -5,9 +5,11 @@
 package sessionbeans;
 
 import Entities.Revision;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,4 +29,21 @@ public class RevisionFacade extends AbstractFacade<Revision> implements Revision
         super(Revision.class);
     }
     
+     @Override
+     public List<Revision> findByEstadoRevision(String estadoRevision) {
+
+        Query query;
+
+        query = em.createNamedQuery("Revision.findByEstadoRevision")
+                .setParameter("estadoRevision", estadoRevision);
+        return query.getResultList();
+    }
+     
+    @Override
+    public List<Revision> findByTecnico(Integer id) {
+        Query query;
+        query = em.createNamedQuery("Revision.findByTecnico")
+                .setParameter("id", id);
+        return query.getResultList();
+    }
 }

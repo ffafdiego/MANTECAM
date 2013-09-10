@@ -43,13 +43,12 @@ public class ItemFacade extends AbstractFacade<Item> implements ItemFacadeLocal 
     // RevisarkmPiezas devuelve 1 si existe al menos una pieza que exceda su kilometraje limite, 0 en caso contrario
     @Override
     public Integer revisarKmPiezas(Vehiculo camion) {
+        System.out.println(camion);
         Integer flag = 0;
         Query query;
-        query = em.createNamedQuery("Item.findByChofer")
-                .setParameter("chofer", camion.getIdVehiculo());
+        query = em.createNamedQuery("Item.findByVehiculo")
+                .setParameter("vehiculo", camion.getIdVehiculo());
         List<Item> piezas = query.getResultList();
-        System.out.println(piezas);
-        System.out.println(piezas.toArray()[0]);
         for (int i = 0; i < piezas.size(); i++) {
             Object iterador = piezas.toArray()[i];
             Item itemsCamion = (Item) iterador;

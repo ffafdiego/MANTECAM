@@ -38,12 +38,12 @@
                 </p:layoutUnit>
                 <p:layoutUnit position="center">
                    
-                        <p:dataTable id="dataTable" var="revision" value="#{managedBeanRevision.revisiones}"  
+                        <p:dataTable id="dataTable" var="revision" value="#{managedBeanRevision.historial}"  
                                      paginator="true" rows="10"  
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                      rowsPerPageTemplate="5,10,15" >  
                             <f:facet name="header">  
-                                Revisiones 
+                                Historial de Revisiones Realizadas 
                             </f:facet>  
 
                             <p:column>  
@@ -69,32 +69,13 @@
                                 <h:outputText value="#{revision.idUsario.nombreTecnico} #{revision.idUsario.apellidoTecnico} " />
                             </p:column>  
 
-                            <p:column>  
-                                <f:facet name="header">  
-                                    <h:outputText value="Estado de la Revisión" />  
-                                </f:facet>  
-                                <h:outputText value="#{revision.estadoRevision}"  />  
-                            </p:column>  
                             
                             <p:column>
                                 <f:facet name="header">  
                                     <h:outputText value="" />  
                                 </f:facet>  
                                 <p:commandButton value="Ver Detalles" icon="ui-icon-search" action="#{managedBeanItem.verDetalleRev(revision.idVehiculo)}"/> 
-                            </p:column> 
-                            <p:column>
-                                 <h:form id="form">
-                                    <p:growl id="msj" showDetail="true" rendered="#{not facesContext.validationFailed}"/>  
-                                    <p:selectOneMenu value="#{tecnico}" rendered="#{revision.idUsario == NULL}">  
-                                        <f:selectItem itemLabel="Seleccione un Mecánico" itemValue="" />  
-                                        <f:selectItems value="#{managedBeanTecnico.tecnicos}" var="tecnico" itemValue="#{tecnico.idUsario}" itemLabel="Nombre: #{tecnico.nombreTecnico} #{tecnico.apellidoTecnico}" />  
-                                    </p:selectOneMenu>  
-                                    <p/>
-                                    <p:commandButton value="Asignar Mecánico" icon="ui-icon-plus" action="#{managedBeanRevision.asignarMecanico(revision.idRevision,tecnico)}" rendered="#{revision.idUsario == NULL}"/> 
-                                    <p:commandButton value="Liberar Mecánico" icon="ui-icon-minus " action="#{managedBeanRevision.liberarMecanico(revision.idRevision)}" rendered="#{revision.idUsario != NULL}"/> 
-                                  </h:form >
-                               
-                            </p:column>
+                            </p:column>                            
                            
                         </p:dataTable>  
 

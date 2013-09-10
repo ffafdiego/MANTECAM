@@ -61,6 +61,7 @@ public class ManagedBeanVehiculo {
     @PostConstruct
     public void init() {
         vehiculos = vehiculoFacade.findAll();
+        kilometraje_vehiculo = 0;
     }
 
     public String[] getEstado_vehiculos() {
@@ -172,6 +173,7 @@ public class ManagedBeanVehiculo {
     }
 
     public void agregarKm(Integer id, Integer km) {
+        System.out.println(id);
         camion = vehiculoFacade.find(id);
         camion.setKilometrajeVehiculo(camion.getKilometrajeVehiculo() + km);
         if (itemFacade.revisarKmPiezas(camion) == 1) {
@@ -191,61 +193,76 @@ public class ManagedBeanVehiculo {
         //Creando Vehículo
         Vehiculo vehiculo;
         vehiculo = new Vehiculo(patente, marca, modelo, ano, kilometraje_vehiculo, chofer, estado_vehiculo);
-        idUsario = new Usuario(1);
-        vehiculo.setIdUsario(idUsario);
-        vehiculoFacade.create(vehiculo);
-        Integer km = vehiculo.getKilometrajeVehiculo();
-        auxiliar = new Vehiculo(vehiculo.getIdVehiculo());
-        tipoItem = new Tipoitem(1);
-        Tipoitem tipo = tipoitemFacade.find(1);
-        Integer km_pieza = tipo.getVidaUtil();
-        nuevoItem(auxiliar, km_pieza+km, tipoItem);
-        tipoItem = new Tipoitem(2);
-        tipo = tipoitemFacade.find(2);
-        km_pieza = tipo.getVidaUtil();
-        nuevoItem(auxiliar, km_pieza+km, tipoItem);
-
-        tipoItem = new Tipoitem(3);
-        tipo = tipoitemFacade.find(3);
-        km_pieza = tipo.getVidaUtil();
-        nuevoItem(auxiliar, km_pieza+km, tipoItem);
-
-        tipoItem = new Tipoitem(4);
-        tipo = tipoitemFacade.find(4);
-        km_pieza = tipo.getVidaUtil();
-        nuevoItem(auxiliar, km_pieza+km, tipoItem);
-
-        tipoItem = new Tipoitem(5);
-        tipo = tipoitemFacade.find(5);
-        km_pieza = tipo.getVidaUtil();
-        nuevoItem(auxiliar, km_pieza+km, tipoItem);
-
-        tipoItem = new Tipoitem(6);
-        tipo = tipoitemFacade.find(6);
-        km_pieza = tipo.getVidaUtil();
-        nuevoItem(auxiliar, km_pieza+km, tipoItem);
-        //id para crear items de vehículo cread 
-
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Vehículo " + patente + " Agregado Exitosamente", marca + " " + modelo);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-        patente ="";
-        marca="";
-        modelo="";
-        ano= null;
-        kilometraje_vehiculo=null;
-        chofer="";
-       estado_vehiculo="";
+        if (kilometraje_vehiculo < 0 ) {
 
 
+
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "No se ha podido ingresar el vehículo", "Kilometraje debe ser mayor a 0");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+
+
+
+        } else {
+            idUsario = new Usuario(1);
+            vehiculo.setIdUsario(idUsario);
+            vehiculoFacade.create(vehiculo);
+            Integer km = vehiculo.getKilometrajeVehiculo();
+            auxiliar = new Vehiculo(vehiculo.getIdVehiculo());
+            tipoItem = new Tipoitem(1);
+            Tipoitem tipo = tipoitemFacade.find(1);
+            Integer km_pieza = tipo.getVidaUtil();
+            nuevoItem(auxiliar, km_pieza + km, tipoItem);
+            tipoItem = new Tipoitem(2);
+            tipo = tipoitemFacade.find(2);
+            km_pieza = tipo.getVidaUtil();
+            nuevoItem(auxiliar, km_pieza + km, tipoItem);
+
+            tipoItem = new Tipoitem(3);
+            tipo = tipoitemFacade.find(3);
+            km_pieza = tipo.getVidaUtil();
+            nuevoItem(auxiliar, km_pieza + km, tipoItem);
+
+            tipoItem = new Tipoitem(4);
+            tipo = tipoitemFacade.find(4);
+            km_pieza = tipo.getVidaUtil();
+            nuevoItem(auxiliar, km_pieza + km, tipoItem);
+
+            tipoItem = new Tipoitem(5);
+            tipo = tipoitemFacade.find(5);
+            km_pieza = tipo.getVidaUtil();
+            nuevoItem(auxiliar, km_pieza + km, tipoItem);
+
+            tipoItem = new Tipoitem(6);
+            tipo = tipoitemFacade.find(6);
+            km_pieza = tipo.getVidaUtil();
+            nuevoItem(auxiliar, km_pieza + km, tipoItem);
+            //id para crear items de vehículo cread 
+
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Vehículo " + patente + " Agregado Exitosamente", marca + " " + modelo);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+            patente = "";
+            marca = "";
+            modelo = "";
+            ano = null;
+            kilometraje_vehiculo = null;
+            chofer = "";
+            estado_vehiculo = "";
+
+        }
 
     }
 
     public String cambiarPagina() {
-
-
-        return "listarVehiculos?faces-redirect=false";
+       return "listarVehiculos?faces-redirect=true";        
     }
+    
+    
+      public String volverTecnico() {
+       return "asignarTecnico?faces-redirect=true";        
+    }
+    
 
     public void nuevoItem(Vehiculo idV, Integer km, Tipoitem tipo) {
 

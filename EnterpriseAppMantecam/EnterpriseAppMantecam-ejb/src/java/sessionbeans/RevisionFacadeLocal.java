@@ -28,5 +28,9 @@ public interface RevisionFacadeLocal {
     List<Revision> findRange(int[] range);
 
     int count();
+
+    public List<Revision> findByEstadoRevision(String estadoRevision);
+
+    public List<Revision> findByTecnico(Integer idUsario);
     
 }

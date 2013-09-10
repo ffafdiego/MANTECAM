@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Revision.findAll", query = "SELECT r FROM Revision r"),
     @NamedQuery(name = "Revision.findByIdRevision", query = "SELECT r FROM Revision r WHERE r.idRevision = :idRevision"),
     @NamedQuery(name = "Revision.findByFechaRevision", query = "SELECT r FROM Revision r WHERE r.fechaRevision = :fechaRevision"),
+    @NamedQuery(name = "Revision.findByTecnico",query ="SELECT r FROM Revision r JOIN r.idUsario t WHERE t.idUsario = :id"),
     @NamedQuery(name = "Revision.findByEstadoRevision", query = "SELECT r FROM Revision r WHERE r.estadoRevision = :estadoRevision")})
 public class Revision implements Serializable {
     private static final long serialVersionUID = 1L;

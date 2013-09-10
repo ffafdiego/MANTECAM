@@ -9,82 +9,81 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
+                <title>Mantecam</title>
+                <style type="text/css">
+                    .ui-widget{font-size:90% !important;}
+                    .ui-layout-unit-content{background-image:url('resources/mantecam.jpg');}
+                </style>   
             </f:facet>
         </h:head>
-
         <h:body>
-
             <p:layout fullPage="true">
-
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    <a href="http://localhost:8080/EnterpriseWebAppMantecam/"><img src="resources/mantecam.jpg" width="1350" height="82" alt="mantecam"/>
-                    </a>  
+                <p:layoutUnit position="north" style="border: none !important;" >
+                    <img src="resources/mantecam.jpg" width="1350" height="82"  alt="mantecam"/>
 
                 </p:layoutUnit>
-
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
+                <p:layoutUnit position="south" size="30"  style="text-align: center; border:none ; font-size: 60%  !important;" collapsible="true">
+                    Desarrollado por Grupo 8 Ltda.
                 </p:layoutUnit>
-
-                <p:layoutUnit position="west" size="250" header="Menú" collapsible="true">
+                <p:layoutUnit position="west" size="180" header="Menú"  style="border: none !important;" collapsible="true">
                     <p:menu>
                         <p:submenu label="Mantecam">
-                            <p:menuitem value="Ingresar Vehiculo" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/nuevoVehiculo.xhtml" />
-                            <p:menuitem value="Ver Listado de Vehículos" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/listarVehiculos.xhtml" />
-                            <p:menuitem value="Agregar Trabajo" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/nuevoTrabajo.xhtml" />
-                            <p:menuitem value="Ver Listado de Trabajos" url="http://localhost:8080/EnterpriseWebAppMantecam/faces/listarTareas.xhtml" />
+                            <p:menuitem value="Ingresar Vehiculo" url="nuevoVehiculo.xhtml" />
+                            <p:menuitem value="Ver Listado de Vehículos" url="listarVehiculos.xhtml" />
+                            <p:menuitem value="Agregar Trabajo" url="nuevoTrabajo.xhtml" />
+                            <p:menuitem value="Ver Listado de Trabajos" url="listarTareas.xhtml" />
 
                         </p:submenu>
-
                     </p:menu>
                 </p:layoutUnit>
+                <p:layoutUnit position="center " style="border: none !important;" header=" Agregar Nueva Tarea a Vehículo" minSize="500">   
 
-                <p:layoutUnit position="center">
-                     <h:form>
-    <h:panelGrid columns="2">
-         
-      
-            
-        <h:outputText value="Seleccione vehículo:" />  
-        
-        <p:selectOneMenu value="#{managedBeanTrabajo.auxiliar}"  >
-        <f:selectItems value="#{managedBeanTrabajo.vehiculos}" var="user" itemValue="#{user.idVehiculo}" itemLabel="Patente: #{user.patente} Modelo: #{user.modelo} "/>
-        </p:selectOneMenu>
-        <h:outputLabel value="Lugar"/> 
-        <p:inputText value="#{managedBeanTrabajo.lugar}"/>
-        <h:outputLabel value="Descripcion del Trabajo"/> 
-        <p:inputText value="#{managedBeanTrabajo.descripcion}"/>             
-        <h:outputLabel value="Fecha"/> 
-        <p:calendar value="#{managedBeanTrabajo.fechaTrabajo}" pattern="dd/MM/yyyy" id="popupCal"/>
-        <h:outputLabel value="Hora de Ingreso"/> 
-        <p:calendar value="#{managedBeanTrabajo.horaIngreso}" pattern="HH:mm a" timeOnly="true"/>
-        <h:outputLabel value="Hora de Salida"/> 
-        <p:calendar value="#{managedBeanTrabajo.horaSalida}" pattern="HH:mm a" timeOnly="true"/>
-        <h:outputLabel value="Estado de Trabajo"/> 
-        <p:selectOneMenu value="#{managedBeanTrabajo.estadoTrabajo}">  
-            <f:selectItem itemLabel="Selecciona Estado de Trabajo" itemValue="" />  
-            <f:selectItem itemLabel="Vigente" itemValue="Vigente" />  
-            <f:selectItem itemLabel="Pendiente" itemValue="2" />  
-            <f:selectItem itemLabel="Finalizado" itemValue="3" />  
-        </p:selectOneMenu>  
-        
-        <p></p>
-        <p:commandButton value="Agregar" action="#{managedBeanTrabajo.crearTrabajo()}"/> 
-        </h:panelGrid>
+                    <h:form id="form1">
+                        <p:messages id="msgs" rendered="#{facesContext.validationFailed}" />  
+                        <p:growl id="msj" showDetail="true" rendered="#{not facesContext.validationFailed}"/> 
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Seleccione vehículo*:" />  
+                            <p:selectOneMenu value="#{managedBeanTrabajo.auxiliar}" label="Vehículo" required="true">
+                                <f:selectItem itemValue="" itemLabel="Seleccione Vehículo"/>
+                                <f:selectItems value="#{managedBeanTrabajo.vehiculos}" var="user" itemValue="#{user.idVehiculo}" itemLabel="Patente: #{user.patente} Modelo: #{user.modelo}"/>
+                            </p:selectOneMenu>
+                            <h:outputLabel value="Lugar*"/> 
+                            <p:inputText value="#{managedBeanTrabajo.lugar}" id="lugar" label="Lugar" required="true" />
+                            <h:outputLabel value="Fecha*" /> 
+                            <p:calendar value="#{managedBeanTrabajo.fechaTrabajo}" id="fecha" label="Fecha" required="true" pattern="dd/MM/yyyy" mindate="#{managedBeanTrabajo.currentDate}" maxdate="31/12/13" />
+                            <h:outputLabel value="Hora de Ingreso*" /> 
+                            <p:calendar value="#{managedBeanTrabajo.horaIngreso}" id="hora_ingreso" label="Hora de Ingreso" required="true" pattern="HH:mm a" timeOnly="true"/>
+                            <h:outputLabel value="Hora de Salida*"/> 
+                            <p:calendar value="#{managedBeanTrabajo.horaSalida}" id="hora_salida" label="Hora de Salida" pattern="HH:mm a"  required="true" timeOnly="true"/>
+                            <h:outputLabel value="Estado de Trabajo*"/> 
+                            <p:selectOneMenu value="#{managedBeanTrabajo.estadoTrabajo}" label="Estado de Trabajo" required="true">  
+                                <f:selectItem itemLabel="Selecciona Estado de Trabajo" itemValue=""  />  
+                                <f:selectItem itemLabel="Vigente" itemValue="Vigente" />  
+                                <f:selectItem itemLabel="Pendiente" itemValue="Pendiente" />  
+                                <f:selectItem itemLabel="Finalizado" itemValue="Finalizado" />  
+                            </p:selectOneMenu>  
+                            <h:outputLabel value="Descripcion del Trabajo:" /> 
+                            <p:inputTextarea autoResize="false" value="#{managedBeanTrabajo.descripcion}" id="descripcion" cols="25" rows="3"/>             
+                            
+                            <p:commandButton value="Agregar Trabajo" icon="ui-icon-plus" update="form1" action="#{managedBeanTrabajo.crearTrabajo()}"/> 
+                            <p:commandButton value="Renovar Campos" icon="ui-icon-arrowrefresh-1-s" type="reset" /> 
+
+                            <p:watermark for="lugar" value="Ej: Plaza de Armas" />
+                            <p:watermark for="fecha" value="Ej: 21/11/2013" /> 
+                            <p:watermark for="hora_salida" value="Ej: 10:30 AM" /> 
+                            <p:watermark for="hora_ingreso" value="Ej: 9:00 AM" /> 
+                            <p:watermark for="descripcion" value="Ej: Retirar basura del sector" /> 
+                            <p/>
 
 
-            
-        </h:form>
-                    
+
+                           
+                        </h:panelGrid>
+                        <h:outputText value="Campos * obligatorios"/>
+                    </h:form>                    
                 </p:layoutUnit>
-                
-
             </p:layout>
-
         </h:body>
-
     </f:view>
 </html>
-
 

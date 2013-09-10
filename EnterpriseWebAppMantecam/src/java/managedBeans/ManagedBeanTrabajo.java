@@ -12,6 +12,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import sessionbeans.TrabajoFacadeLocal;
 import sessionbeans.VehiculoFacadeLocal;
 
@@ -37,6 +39,8 @@ public class ManagedBeanTrabajo {
     private List<Trabajo> trabajos;
     private Integer auxiliar;
     private Vehiculo carro;
+    private Date currentDate = new Date();
+
 
     
     @PostConstruct
@@ -45,6 +49,10 @@ public class ManagedBeanTrabajo {
         vehiculos = vehiculoFacade.findAll();
     }
     
+    public Date getCurrentDate() {
+    return currentDate;
+}
+
 
     public Integer getAuxiliar() {
         return auxiliar;
@@ -148,6 +156,10 @@ public class ManagedBeanTrabajo {
         Vehiculo car = new Vehiculo(auxiliar);
         trabajo.setIdVehiculo(car);
         trabajoFacade.create(trabajo);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Vehículo " + car.getPatente() + "se le ha asignado un trabajo Exitosamente", "Trabajo asignado en"+lugar+" el día "+ fechaTrabajo.getDay()+" del "+fechaTrabajo.getMonth());
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        descripcion="";fechaTrabajo=null;horaIngreso=null;horaSalida=null;lugar="";estadoTrabajo="";
                 
     }    
     

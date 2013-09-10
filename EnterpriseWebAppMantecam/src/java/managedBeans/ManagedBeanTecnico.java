@@ -4,12 +4,14 @@
  */
 package managedBeans;
 
+import Entities.Revision;
 import Entities.TecnicoMecanico;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import sessionbeans.RevisionFacadeLocal;
 import sessionbeans.TecnicoMecanicoFacadeLocal;
 
 /**
@@ -20,14 +22,29 @@ import sessionbeans.TecnicoMecanicoFacadeLocal;
 @Dependent
 public class ManagedBeanTecnico {
     @EJB
+    private RevisionFacadeLocal revisionFacade;
+    @EJB
     private TecnicoMecanicoFacadeLocal tecnicoMecanicoFacade;
     List<TecnicoMecanico> tecnicos;
-
+    List<Revision> misRevisiones;
     /**
      * Creates a new instance of ManagedBeanTecnico
      */
     public ManagedBeanTecnico() {
        
+    }
+    @PostConstruct
+    public void init() {
+        tecnicos = tecnicoMecanicoFacade.findAll();
+        
+    }
+
+    public List<Revision> getMisRevisiones() {
+        return misRevisiones;
+    }
+
+    public void setMisRevisiones(List<Revision> misRevisiones) {
+        this.misRevisiones = misRevisiones;
     }
 
     public List<TecnicoMecanico> getTecnicos() {
@@ -37,8 +54,5 @@ public class ManagedBeanTecnico {
     public void setTecnicos(List<TecnicoMecanico> tecnicos) {
         this.tecnicos = tecnicos;
     }
-    @PostConstruct
-    public void init() {
-        tecnicos = tecnicoMecanicoFacade.findAll();
-    }
+   
 }
